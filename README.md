@@ -47,3 +47,32 @@ Implementar uma **Pilha Linear (Stack)** (capacidade: 3) para servir como "Baú 
    ```bash
    gcc tetris_stack.c -o tetris
    
+   ------------------------------------------------------------------------------------------------------------------------------------------------
+
+   Nível Mestre 3.0 - CHECK
+
+   # 🧱 Tetris Stack - Gerenciador de Peças (Versão Final - Nível Mestre)
+
+Bem-vindo ao repositório do **Tetris Stack**, um simulador de gerenciamento de fluxo de dados baseado no clássico jogo de blocos. Este projeto foi desenvolvido para aplicar os conceitos fundamentais de Estruturas de Dados na linguagem C, integrando diferentes formatos de armazenamento em memória.
+
+## 🎯 Objetivo da Fase 1 (Novato) - Concluído
+Implementar uma **Fila Circular (Queue)** utilizando arrays estáticos (capacidade: 5) para simular a "esteira" de peças que o jogador receberá. O uso da lógica circular garante a otimização da memória.
+
+## ⚔️ Objetivo da Fase 2 (Aventureiro) - Concluído
+Implementar uma **Pilha Linear (Stack)** (capacidade: 3) para servir como "Baú de Reserva", permitindo a integração de dados entre a Fila e a Pilha, com *auto-refill* da esteira.
+
+## 🧙‍♂️ Objetivo da Fase 3 (Mestre) - Concluído
+Implementar a **Manipulação Direta de Memória (Swap)**, permitindo que o jogador troque peças de lugar entre as duas estruturas de dados dinamicamente, sem retirá-las do jogo.
+
+## ⚙️ Mecânicas e Funcionalidades Atuais
+* **Gerador Aleatório Sequencial:** Peças geradas com `id` único.
+* **Auto-Refill (Fila):** A esteira nunca para, mantendo sempre 5 elementos.
+* **Reserva LIFO (Pilha):** Baú de limite máximo de 3 peças.
+* **Troca Simples:** Permite alternar a 1ª peça da esteira com a peça do topo da reserva.
+* **Mega Swap:** Alterna as 3 primeiras peças da esteira com as 3 peças da reserva simultaneamente (exige que o baú esteja cheio).
+* **Display em Tempo Real:** Renderização visual limpa e separada para UX otimizada.
+
+## 🚀 Como Executar
+1. Compile o código-fonte via terminal:
+   ```bash
+   gcc tetris_stack.c -o tetris

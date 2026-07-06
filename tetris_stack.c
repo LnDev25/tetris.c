@@ -1,4 +1,4 @@
-// Nível Novato/Aventureiro - Começo //
+// Nível Novato/Aventureiro/Mestre - Começo //
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,12 +33,14 @@ void inicializarPilha(Pilha *p) {
     p->topo = -1; 
 }
 
-// Funções
-void inicializarFila(Fila *f) ;
+void inicializarFila(Fila *f);
 Peca gerarPeca();
-void enqueue(Fila *f, Peca p) ;
+void enqueue(Fila *f, Peca p);
 Peca dequeue(Fila *f);
 void mostrarFila(Fila f);
+void mostrarPilha(Pilha p); 
+void push(Pilha *p, Peca peca);
+Peca pop(Pilha *p);
 
 // Motor da pilha (push, pop e mostrarPilha)
 void push(Pilha *p, Peca peca) {
@@ -64,16 +66,6 @@ Peca pop(Pilha *p) {
     }
 }
 
-void mostrarPilha(Pilha p) {
-    if (p.topo == -1 ) {
-        printf("\n[Vazia]");
-    } else {
-        for (int i = p.topo; i >= 0; i--) {
-           printf("[%c %d] ", p.vetor[i].nome, p.vetor[i].id); 
-        }
-    }
-}                                                                                                        
-
 // Main
 int main () {
     Fila esteira;
@@ -85,7 +77,7 @@ int main () {
     // Aleatoridade
     srand(time(NULL)) ;
 
-    // Pré-preenchendo a esteira com 5 peças (Auto-Refill Inicial)
+    // Pré-preenchendo a esteira com 5 peças 
     for (int i = 0; i < MAX; i++) {
         enqueue(&esteira, gerarPeca());
     }
@@ -94,10 +86,13 @@ int main () {
     int opcao = 0;
     do {
 
-        printf("\n1. Jogar peca");
-        printf("\n2. Reservar peca");
-        printf("\n3. Usar peca reservada");
+        printf("\n1. Jogar peca da frente da fila");
+        printf("\n2. Enviar peca da fila para a pilha de reserva");
+        printf("\n3. Usar peca da pilha de reserva");
+        printf("\n4. Trocar peca da frente da fila com o topo da pilha");
+        printf("\n5. Trocar os 3 primeiros da fila com as 3 pecas da pilha");
         printf("\n0. Sair");
+        printf("\nOpcao: ");
         scanf("%d", &opcao);
         
         switch (opcao) {
@@ -127,6 +122,34 @@ int main () {
                     printf("\n[JOGO] Voce usou a reserva: %c (ID: %d)!\n", p.nome, p.id);
                 }
                 break;
+            }
+
+            case 4: { // Troca Simples
+                if (reserva.topo == -1) {
+                    printf("\n[SISTEMA] Operacao cancelada: A reserva esta vazia!\n");
+                } else {
+                    Peca temp = esteira.vetor[esteira.inicio];
+                    esteira.vetor[esteira.inicio] = reserva.vetor[reserva.topo];
+                    reserva.vetor[reserva.topo] = temp;
+                    printf("\n[JOGO] Troca simples realizada com sucesso!\n") ;
+                }
+                break;
+            }
+
+            case 5: { // Troca Múltipla
+                if (reserva.topo < 2) {
+                    printf("\n[SISTEMA] Operacao cancelada: A reserva precisa ter 3 pecas!\n");
+                } else { 
+                    for (int i = 0; i < 3; i++) {
+                        int f_idx = (esteira.inicio + i) % MAX;
+                        int p_idx = reserva.topo - i;                
+                        Peca temp = esteira.vetor[f_idx];
+                        esteira.vetor[f_idx] = reserva.vetor[p_idx];
+                        reserva.vetor[p_idx] = temp;
+                    }
+                    printf("\n[JOGO] Mega Swap realizado com sucesso! 3 pecas alternadas.\n");
+                } 
+                break; 
             }
 
             case 0:
@@ -199,8 +222,9 @@ Peca dequeue(Fila *f) {
 
 // Mostrando a fila
 void mostrarFila(Fila f) {
+    printf("\nFila de pecas: ");
     if (f.total == 0) {
-        printf("\n[SISTEMA] Fila vazia");
+        printf("[Vazia]");
     } else {
         for (int i = 0; i < f.total; i++) {
             int indice = (f.inicio + i) % MAX;
@@ -209,4 +233,17 @@ void mostrarFila(Fila f) {
     }
 }
 
-// Nível Novato/Aventureiro - Fim //
+// Mostrando a pilha
+void mostrarPilha(Pilha p) {
+    printf("\nPilha de reserva (Topo -> Base): ");
+    if (p.topo == -1 ) {
+        printf("[Vazia]\n");
+    } else {
+        for (int i = p.topo; i >= 0; i--) {
+           printf("[%c %d] ", p.vetor[i].nome, p.vetor[i].id); 
+        }
+        printf("\n");
+    }
+}
+
+// Nível Novato/Aventureiro/Mestre - Fim //
