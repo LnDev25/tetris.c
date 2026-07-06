@@ -23,3 +23,27 @@ Implementar uma **Fila Circular (Queue)** utilizando arrays estáticos para simu
    ./tetris
 
 ----------------------------------------------------------------------------------------------------------------------------------
+
+Nível Aventureiro 2.0 - CHECK
+
+# 🧱 Tetris Stack - Gerenciador de Peças
+
+Bem-vindo ao repositório do **Tetris Stack**, um simulador de gerenciamento de fluxo de dados baseado no clássico jogo de blocos. Este projeto foi desenvolvido para aplicar os conceitos fundamentais de Estruturas de Dados na linguagem C, integrando diferentes formatos de armazenamento em memória.
+
+## 🎯 Objetivo da Fase 1 (Novato) - Concluído
+Implementar uma **Fila Circular (Queue)** utilizando arrays estáticos (capacidade: 5) para simular a "esteira" de peças que o jogador receberá. O uso da lógica circular garante a otimização da memória, reutilizando espaços liberados sem a necessidade de realocar todos os elementos.
+
+## ⚔️ Objetivo da Fase 2 (Aventureiro) - Concluído
+Implementar uma **Pilha Linear (Stack)** (capacidade: 3) para servir como "Baú de Reserva", permitindo a integração de dados entre a Fila e a Pilha, além de automatizar o fluxo de peças.
+
+## ⚙️ Mecânicas e Funcionalidades Atuais
+* **Gerador Aleatório Sequencial:** Peças (I, O, T, L) geradas com `id` único usando variáveis estáticas.
+* **Auto-Refill (Fila):** A esteira nunca para. Sempre que uma peça é retirada (`dequeue`), uma nova peça é gerada e inserida automaticamente (`enqueue`), mantendo a esteira sempre com 5 elementos.
+* **Reserva LIFO (Pilha):** O jogador pode guardar uma peça da esteira no baú (`push`) e resgatá-la posteriormente (`pop`). O baú obedece a regra *Last In, First Out* e possui travas de segurança contra *overflow* (capacidade máxima de 3 peças).
+* **Display em Tempo Real:** Renderização do estado atual de ambas as estruturas (Fila e Pilha) após cada turno.
+
+## 🚀 Como Executar
+1. Compile o código-fonte via terminal:
+   ```bash
+   gcc tetris_stack.c -o tetris
+   
